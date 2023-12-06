@@ -14,14 +14,15 @@ class HomePage extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: SafeArea(
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Container(
-                    height: 200,
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 200.0,
+                floating: false,
+                //    pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  // title: Text('سلام امیرحسن'),
+                  background: Container(
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: ColorConstants.mainColor,
@@ -74,26 +75,36 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
-                const PersonalGoalIndicator(),
-                const SizedBox(height: 15),
-                const PersonalGoalIndicator(),
-                const SizedBox(height: 15),
-                ListView.builder(
-                  physics: const PageScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return const ReceiveMoneyContainer(
+              ),
+              SliverToBoxAdapter(
+                child: const SizedBox(height: 15),
+              ),
+              SliverToBoxAdapter(
+                child: const PersonalGoalIndicator(),
+              ),
+              SliverToBoxAdapter(
+                child: const SizedBox(height: 15),
+              ),
+              SliverToBoxAdapter(
+                child: const PersonalGoalIndicator(),
+              ),
+              SliverToBoxAdapter(
+                child: const SizedBox(height: 15),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return ReceiveMoneyContainer(
                       dateTime: '1400/05/07',
                       description: 'مرتب کردن تخت خواب',
                       type: 'A',
                       price: '22540',
                     );
                   },
-                )
-              ],
-            ),
+                  childCount: 10,
+                ),
+              ),
+            ],
           ),
         ),
       ),
