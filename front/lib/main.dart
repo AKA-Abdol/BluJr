@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VRouter(
+      theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       routes: routes,
     );
