@@ -186,7 +186,6 @@ export class UserService {
   @Cron(CronExpression.EVERY_5_MINUTES)
   async payWeekly() {
     const children = await this.userRepo.getChildrenHasWeekly();
-    console.log(children);
     Promise.all(
       children.map(
         (child) =>
