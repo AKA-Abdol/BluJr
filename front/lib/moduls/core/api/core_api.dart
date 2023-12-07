@@ -12,15 +12,13 @@ class CoreApi {
     Map<String, String>? headers,
     String? insertedToken,
   }) async {
-    print('object');
     print(Storage.instance.accessToken ?? 'empty');
     try {
-      print('try');
       return await _client.get(
         url,
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
-          HttpHeaders.authorizationHeader: Storage.instance.accessToken!,
+          HttpHeaders.authorizationHeader: 'Bearer ${Storage.instance.accessToken!}',
         }..addAll(headers ?? {}),
       );
     } catch (e) {
@@ -40,18 +38,24 @@ class CoreApi {
     Map<String, String>? headers,
     Map<String, dynamic>? body,
   }) async {
-    final token = Storage.instance.accessToken;
-    print(body);
     try {
       return await _client.post(
         url,
-        body: body,
+        body: jsonEncode(body), // Encode the body as JSON
         headers: {
-          if (token != null) 'access': token,
-        }..addAll(headers ?? {}),
+          HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
+          HttpHeaders.authorizationHeader: 'Bearer ${Storage.instance.accessToken!}',
+          ...headers ?? {},
+        },
       );
     } catch (e) {
-      debugPrint(e.toString());
+      if (e is HttpException) {
+        // Handle HttpException
+        print('HttpException: ${e.message}');
+      } else {
+        // Handle other types of exceptions
+        print('Exception: $e');
+      }
       return null;
     }
   }

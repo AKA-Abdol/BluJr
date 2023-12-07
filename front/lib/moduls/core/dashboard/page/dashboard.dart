@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khorsand87/moduls/core/app_bottom_nav_bar.dart';
+import 'package:khorsand87/moduls/core/components/app_drawer.dart';
 
 import 'package:khorsand87/moduls/core/dashboard/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -28,18 +29,8 @@ class _DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
-      /*  drawer: FootballihaDrawer(
-        isLoadingBadges: provider.isLoadingBadges,
-        badges: provider.badges,
-        appName: provider.appVersion,
-        profile: provider.myProfile,
-        isLoadingProfile: provider.isLoadingProfile,
-      ), */
+      endDrawer: const AppDrawer(),
       body: VWidgetGuard(
-        /*  afterEnter: (context, from, to) {
-          context.read<DashboardProvider>().initialize();
-        }, */
         child: child,
       ),
       bottomNavigationBar: const AppBottomNavbar(),

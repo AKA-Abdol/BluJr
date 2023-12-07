@@ -89,6 +89,9 @@ class _AuthPageState extends State<AuthPage> {
                               child: selectedTabIndex == loginTab
                                   ? LoginScreen(
                                       theme: theme,
+                                      onSaveFullName: saveFullNameInAccessToken,
+                                      fullnameController: _fullNameController,
+                                      apiCall: getProfileAndUpdateUI,
                                     )
                                   : SignUpScreen(
                                       fullnameController: _fullNameController,

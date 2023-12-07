@@ -7,6 +7,7 @@ class AppTextField extends StatelessWidget {
   AppTextField({
     Key? key,
     this.textController,
+    this.maxLines,
     this.hintText,
     required this.labelText,
     this.inputType,
@@ -27,6 +28,7 @@ class AppTextField extends StatelessWidget {
   final TextAlign? align;
   final Widget? suffix;
   final Widget? prefix;
+  int? maxLines;
   final void Function(String)? onChange;
   final List<TextInputFormatter>? inputFormatters;
   final void Function()? onTap;
@@ -34,45 +36,48 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      maxLines: 7,
-      textAlign: align ?? TextAlign.left,
-      cursorColor: Colors.black,
-      inputFormatters: inputFormatters,
-      keyboardType: inputType,
-      controller: textController,
-      enabled: enable,
-      style: Theme.of(context).textTheme.bodyMedium,
-      decoration: InputDecoration(
-          filled: true,
-          isDense: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Color(0xFFCDCDCD),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: TextField(
+        maxLines: maxLines ?? 1,
+        textAlign: align ?? TextAlign.right,
+        cursorColor: Colors.black,
+        inputFormatters: inputFormatters,
+        keyboardType: inputType,
+        controller: textController,
+        enabled: enable,
+        style: Theme.of(context).textTheme.bodyMedium,
+        decoration: InputDecoration(
+            filled: true,
+            isDense: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                color: Color(0xFFCDCDCD),
+              ),
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Color(0xFFCDCDCD),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                color: Color(0xFFCDCDCD),
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              color: Color(0xFFCDCDCD),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: const BorderSide(
+                color: Color(0xFFCDCDCD),
+              ),
             ),
-          ),
-          fillColor: Colors.white,
-          labelText: labelText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          labelStyle: Theme.of(context).textTheme.bodyMedium,
-          suffix: suffix,
-          prefix: prefix,
-          hintText: hintText),
-      onChanged: onChange,
-      onTap: onTap,
+            fillColor: Colors.white,
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            labelStyle: Theme.of(context).textTheme.bodyMedium,
+            suffix: suffix,
+            prefix: prefix,
+            hintText: hintText),
+        onChanged: onChange,
+        onTap: onTap,
+      ),
     );
   }
 }

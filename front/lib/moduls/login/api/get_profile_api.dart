@@ -16,16 +16,6 @@ class GetProfileApiImp implements GetProfileApi {
   @override
   Future<ProfileModel> getProfile() async {
     try {
-      print(
-        Uri.parse(
-          'https://filmia.glss.ir/api/V0.0.0/profile/',
-        ),
-      );
-      print(
-        Uri.parse(
-          Urls.profile,
-        ),
-      );
       final response = await _coreApi.get(
         Uri.parse(
           Urls.profile,

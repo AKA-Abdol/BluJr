@@ -3,6 +3,7 @@ import 'package:khorsand87/moduls/common_goal/page/commmon_goal_detail_page.dart
 import 'package:khorsand87/moduls/common_goal/page/common_goal_page.dart';
 import 'package:khorsand87/moduls/core/api/storage.dart';
 import 'package:khorsand87/moduls/core/dashboard/page/dashboard.dart';
+import 'package:khorsand87/moduls/create_child/page/create_child_page.dart';
 import 'package:khorsand87/moduls/home/page/home_page.dart';
 import 'package:khorsand87/moduls/login/page/auth_page.dart';
 import 'package:khorsand87/moduls/lone/page/lone_detail_page.dart';
@@ -95,7 +96,20 @@ List<VRouteElement> get routes {
             ),
           ],
         ),
+        VPopHandler(
+            onSystemPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+            onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+            stackedRoutes: drawerRoutes)
       ],
+    ),
+  ];
+}
+
+List<VRouteElement> get drawerRoutes {
+  return [
+    VWidget(
+      path: '/creat_child',
+      widget: const CreateChildPage(),
     ),
   ];
 }

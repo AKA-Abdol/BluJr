@@ -5,15 +5,16 @@ import 'package:khorsand87/moduls/common_goal/components/indicator.dart';
 import 'package:khorsand87/moduls/common_goal/components/personal_goal_indicator.dart';
 
 class PieCharts extends StatefulWidget {
-  const PieCharts({super.key});
+  const PieCharts({super.key, required this.index});
+  final int index;
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }
 
-class PieChart2State extends State {
-  int touchedIndex = -1;
+int touchedIndex = -1;
 
+class PieChart2State extends State {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +22,11 @@ class PieChart2State extends State {
         const SizedBox(height: 0),
         const PersonalGoalIndicator(),
         const SizedBox(height: 20),
-        const CommonGoalDescription(),
+        const CommonGoalDescription(
+          description:
+              'من میخوام برای شما کنسول بازی بخرم فیمت این کنسول 25 میلیون تومان است  من 23 میلیون را تامین میکنم و شما باید 3 ملیون مابقی را با پس انداز هایتان پرداخت کتید هرکس که بتواند بیشتر بودجه بیشتری را اختصاص دهد میتواند 3 بازی اول را انتخاب کند',
+          goalTitle: 'خرید ps5',
+        ),
         const Spacer(),
         Row(
           children: <Widget>[

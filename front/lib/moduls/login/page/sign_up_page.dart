@@ -53,8 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             widget.onSaveFullName(widget.fullnameController.text);
 
             // Add a delay of 5 seconds before calling widget.apiCall()
-            Future.delayed(Duration(seconds: 5), () {
-              print('call');
+            Future.delayed(Duration(seconds: 2), () {
               widget.apiCall();
 
               // Navigate or perform other actions as needed
