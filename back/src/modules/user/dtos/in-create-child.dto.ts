@@ -11,4 +11,9 @@ export class InCreateChildBodyDto {
   @IsNumber()
   @Min(0)
   initialWallet: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  weekly: number;
 }

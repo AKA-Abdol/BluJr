@@ -28,6 +28,12 @@ export class User {
 
   @Prop()
   card: Card;
+
+  @Prop()
+  weekly?: number;
+
+  @Prop({ default: true })
+  isWeeklyActive?: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -15,12 +15,13 @@ export class TransactionService {
     from: mongoose.Types.ObjectId,
     to: mongoose.Types.ObjectId,
     amount: number,
+    type: TransactionType = TransactionType.TRANSFER,
   ) {
     const transaction = await this.transactionRepo.create({
       from: new mongoose.Types.ObjectId(from),
       to: new mongoose.Types.ObjectId(to),
       amount: amount,
-      type: TransactionType.TRANSFER,
+      type: type,
     });
     if (transaction === null)
       throw new InternalServerErrorException('خطای سرور');

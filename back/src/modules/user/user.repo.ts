@@ -25,9 +25,16 @@ export class UserRepo {
     return user;
   }
 
-  async getChildren(
+  async getChildrenByParentId(
     parentId: mongoose.Types.ObjectId,
   ): Promise<MongoDoc<User>[]> {
     return this.model.find({ parentId }).exec();
+  }
+
+  async getChildrenHasWeekly(): Promise<MongoDoc<User>[]> {
+    return this.model.find({
+      parentId: { $exists: 1 },
+      weekly: { $gt: 0 },
+    });
   }
 }

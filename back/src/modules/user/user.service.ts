@@ -12,6 +12,8 @@ import { InCreateChildBodyDto } from './dtos/in-create-child.dto';
 import { InjectConnection } from '@nestjs/mongoose';
 import { TransactionService } from '../transaction/transaction.service';
 import { InTransferDto } from './dtos/in-transfer.dto';
+import { TransactionType } from '../transaction/transaction.schema';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class UserService {
@@ -61,6 +63,7 @@ export class UserService {
 
   async createChild(parentId: string, input: InCreateChildBodyDto) {
     if (!input.initialWallet) input.initialWallet = 0;
+    if (!input.weekly) input.weekly = 0;
     const parent = await this.userRepo.getById(
       new mongoose.Types.ObjectId(parentId),
     );
@@ -79,6 +82,7 @@ export class UserService {
         wallet: input.initialWallet,
         card: this.generateNewCard(),
         parentId: parent._id,
+        weekly: input.weekly,
       });
       if (input.initialWallet) {
         await this.userRepo.updateWalletBy(
@@ -107,7 +111,7 @@ export class UserService {
       new mongoose.Types.ObjectId(parentId),
     );
     if (parent === null) throw new NotFoundException('والد یافت نشد');
-    const children = await this.userRepo.getChildren(
+    const children = await this.userRepo.getChildrenByParentId(
       new mongoose.Types.ObjectId(parentId),
     );
     return children.map(UserDao.convertOne);
@@ -134,6 +138,7 @@ export class UserService {
     from: mongoose.Types.ObjectId,
     to: mongoose.Types.ObjectId,
     amount: number,
+    reason: TransactionType = TransactionType.TRANSFER,
   ) {
     const transactionSession = await this.connection.startSession();
     transactionSession.startTransaction();
@@ -141,7 +146,12 @@ export class UserService {
       await this.userRepo.updateWalletBy(from, -amount);
       await this.userRepo.updateWalletBy(to, amount);
 
-      const tr = await this.transactionService.transfer(from, to, amount);
+      const tr = await this.transactionService.transfer(
+        from,
+        to,
+        amount,
+        reason,
+      );
 
       await transactionSession.commitTransaction();
       return tr;
@@ -171,5 +181,23 @@ export class UserService {
       throw new BadRequestException(
         'فرزند فقط می تواند به والد یا برادران یا خواهران انتقال دهد',
       );
+  }
+
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  async payWeekly() {
+    const children = await this.userRepo.getChildrenHasWeekly();
+    console.log(children);
+    Promise.all(
+      children.map(
+        (child) =>
+          child.isWeeklyActive &&
+          this.walletTransfer(
+            child.parentId,
+            child._id,
+            child.weekly,
+            TransactionType.WEEKLY,
+          ),
+      ),
+    );
   }
 }

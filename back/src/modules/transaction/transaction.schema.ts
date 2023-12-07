@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 export enum TransactionType {
   TRANSFER = 'Transfer',
+  WEEKLY = 'Weekly',
 }
 
 @Schema({ timestamps: true })
