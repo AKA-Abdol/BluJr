@@ -1,6 +1,6 @@
-import 'package:khorsand87/moduls/core/model/card_info_model.dart';
+import 'package:khorsand87/moduls/login/model/card_info_model.dart';
 
-class UserProfile {
+class ProfileModel {
   final String id;
   final CardInfo card;
   final String firstName;
@@ -8,7 +8,7 @@ class UserProfile {
   final int wallet;
   final String type;
 
-  UserProfile({
+  ProfileModel({
     required this.id,
     required this.card,
     required this.firstName,
@@ -17,8 +17,8 @@ class UserProfile {
     required this.type,
   });
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    return UserProfile(
+  factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    return ProfileModel(
       id: json['id'] ?? '',
       card: CardInfo.fromJson(json['card'] ?? {}),
       firstName: json['firstName'] ?? '',

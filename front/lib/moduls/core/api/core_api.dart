@@ -12,16 +12,25 @@ class CoreApi {
     Map<String, String>? headers,
     String? insertedToken,
   }) async {
+    print('object');
+    print(Storage.instance.accessToken ?? 'empty');
     try {
+      print('try');
       return await _client.get(
         url,
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
-          HttpHeaders.authorizationHeader: 'Bearer 657178e4d9c839661d89fa31',
+          HttpHeaders.authorizationHeader: Storage.instance.accessToken!,
         }..addAll(headers ?? {}),
       );
     } catch (e) {
-      debugPrint(e.toString());
+      if (e is HttpException) {
+        // Handle HttpException
+        print('HttpException: ${e.message}');
+      } else {
+        // Handle other types of exceptions
+        print('Exception: $e');
+      }
       return null;
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khorsand87/moduls/common_goal/page/commmon_goal_detail_page.dart';
 import 'package:khorsand87/moduls/common_goal/page/common_goal_page.dart';
+import 'package:khorsand87/moduls/core/api/storage.dart';
 import 'package:khorsand87/moduls/core/dashboard/page/dashboard.dart';
 import 'package:khorsand87/moduls/home/page/home_page.dart';
 import 'package:khorsand87/moduls/login/page/auth_page.dart';
@@ -10,7 +11,9 @@ import 'package:khorsand87/moduls/task/page/task_page.dart';
 import 'package:khorsand87/theme/app_theme.dart';
 import 'package:vrouter/vrouter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Storage.instance.initialize();
   runApp(const MyApp());
 }
 
