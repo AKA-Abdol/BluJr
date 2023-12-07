@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_sliders: ^23.2.7
   lottie: ^2.7.0
   fl_chart: ^0.65.0
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
