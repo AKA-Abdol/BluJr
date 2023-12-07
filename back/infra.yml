@@ -1,0 +1,12 @@
+version: '1.0'
+services:
+  mongodb:
+    image: mongo
+    restart: on-failure
+    ports:
+      - '27017:27017'
+    volumes:
+      - khorsand87_mongo_data:/data/db
+
+volumes:
+  khorsand87_mongo_data:
