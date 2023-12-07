@@ -7,9 +7,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('bluJunior swagger')
+    .setTitle('BluJunior swagger')
     .setDescription('api documentation')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);

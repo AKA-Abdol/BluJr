@@ -1,10 +1,8 @@
-enum ValueEnum {
-  HASAN = 'hasan',
-  HOSSEIN = 'hossein',
-}
+import { Card, UserType } from '../user.schema';
+
 export class OutGetProfileDto {
   firstName: string;
   lastName: string;
-  wallet: number;
-  value?: ValueEnum;
+  type: UserType;
+  card: Card;
 }
