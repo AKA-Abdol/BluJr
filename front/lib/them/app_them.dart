@@ -20,14 +20,14 @@ mixin AppTheme {
           color: Color(0xFF787878),
         ),
         primaryIconTheme: const IconThemeData(
-          color: Color(0xFF3BC355),
+          color: Color(0xFFff6600),
         ),
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
           outline: Color(0xFFCDCDCD),
           primary: Color(0xFF002134),
           onPrimary: Colors.white,
-          secondary: Color(0xFF3BC355),
+          secondary: Color(0xFFff6600),
           onSecondary: Colors.white,
           error: Color(0xFFC84045),
           onError: Colors.white,
@@ -40,7 +40,7 @@ mixin AppTheme {
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
-          selectedItemColor: Color(0xFF3BC355),
+          selectedItemColor: Color(0xFFff6600),
           unselectedItemColor: Color(0xFF9B9B9B),
           showUnselectedLabels: true,
         ),
@@ -50,11 +50,11 @@ mixin AppTheme {
               TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
-                color: Color(0xFF3BC355),
+                color: Color(0xFFff6600),
               ),
             ),
             foregroundColor: MaterialStatePropertyAll(
-              Color(0xFF3BC355),
+              Color(0xFFff6600),
             ),
           ),
         ),
