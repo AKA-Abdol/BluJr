@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:khorsand87/moduls/core/app_bottom)nav_bar.dart';
+import 'package:khorsand87/moduls/core/app_bottom_nav_bar.dart';
 
 import 'package:khorsand87/moduls/core/dashboard/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';

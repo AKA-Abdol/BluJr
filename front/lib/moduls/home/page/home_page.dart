@@ -87,12 +87,6 @@ class HomePage extends StatelessWidget {
               const SliverToBoxAdapter(
                 child: SizedBox(height: 15),
               ),
-              const SliverToBoxAdapter(
-                child: PersonalGoalIndicator(),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 15),
-              ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {

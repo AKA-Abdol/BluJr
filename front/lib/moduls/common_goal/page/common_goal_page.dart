@@ -20,19 +20,36 @@ class _CommonGoalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('اهداف جمعی'),
-        ),
-        body: Column(
-          children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return CommonGoalCard();
-                })
-          ],
+    final staticProvider = context.read<CommonGoalDetailProvider>();
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('اهداف جمعی'),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                ListView.builder(
+                    padding: EdgeInsets.all(8),
+                    physics: const ScrollPhysics(),
+                    itemCount: 20,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CommonGoalCard(
+                          onTap: () => staticProvider.goToGoalDetailPage(),
+                          goalPrice: '4500000',
+                          goalTitle: 'خرید ps5',
+                          startDate: '1403/05/09',
+                        ),
+                      );
+                    })
+              ],
+            ),
+          ),
         ),
       ),
     );
