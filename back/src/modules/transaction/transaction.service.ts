@@ -24,6 +24,7 @@ export class TransactionService {
     });
     if (transaction === null)
       throw new InternalServerErrorException('خطای سرور');
+    return transaction;
   }
 
   async getDeposit(userId: mongoose.Types.ObjectId) {

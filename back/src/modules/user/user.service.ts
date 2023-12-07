@@ -11,6 +11,7 @@ import { UserDao } from './daos/user.dao';
 import { InCreateChildBodyDto } from './dtos/in-create-child.dto';
 import { InjectConnection } from '@nestjs/mongoose';
 import { TransactionService } from '../transaction/transaction.service';
+import { InTransferDto } from './dtos/in-transfer.dto';
 
 @Injectable()
 export class UserService {
@@ -123,5 +124,52 @@ export class UserService {
       ...tr,
       toName: `${tos[index].firstName} ${tos[index].lastName}`,
     }));
+  }
+
+  async canChildTransfer(child: MongoDoc<User>, to: MongoDoc<User>) {
+    return child.parentId.equals(to._id) || child.parentId.equals(to.parentId);
+  }
+
+  private async walletTransfer(
+    from: mongoose.Types.ObjectId,
+    to: mongoose.Types.ObjectId,
+    amount: number,
+  ) {
+    const transactionSession = await this.connection.startSession();
+    transactionSession.startTransaction();
+    try {
+      await this.userRepo.updateWalletBy(from, -amount);
+      await this.userRepo.updateWalletBy(to, amount);
+
+      const tr = await this.transactionService.transfer(from, to, amount);
+
+      await transactionSession.commitTransaction();
+      return tr;
+    } catch (error) {
+      transactionSession.abortTransaction();
+      throw new InternalServerErrorException('خطای سرور');
+    } finally {
+      await transactionSession.endSession();
+    }
+  }
+
+  async transfer(userId: string, input: InTransferDto, toId: string) {
+    const from = await this.userRepo.getById(
+      new mongoose.Types.ObjectId(userId),
+    );
+
+    if (!this.hasCredit(from, input.amount))
+      throw new BadRequestException('موجودی کافی نیست');
+
+    const to = await this.userRepo.getById(new mongoose.Types.ObjectId(toId));
+
+    if (this.isParent(from))
+      return this.walletTransfer(from._id, to._id, input.amount);
+    if (this.canChildTransfer(from, to))
+      return this.walletTransfer(from._id, to._id, input.amount);
+    else
+      throw new BadRequestException(
+        'فرزند فقط می تواند به والد یا برادران یا خواهران انتقال دهد',
+      );
   }
 }

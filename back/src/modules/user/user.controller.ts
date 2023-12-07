@@ -1,9 +1,18 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { OutGetProfileDto } from './dtos/out-get-profile.dto';
 import { AuthGaurd } from 'src/guards/auth.guard';
 import { InCreateChildBodyDto } from './dtos/in-create-child.dto';
+import { InTransferDto } from './dtos/in-transfer.dto';
 
 @UseGuards(AuthGaurd)
 @Controller('profile')
@@ -39,5 +48,16 @@ export class UserController {
   @ApiOperation({ summary: 'get all transactions' })
   async getTransactions(@Req() { userId }: { userId: string }) {
     return this.userService.getTransactions(userId);
+  }
+
+  @Post('/:id/transfer')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'transfer money to' })
+  async transfer(
+    @Req() { userId }: { userId: string },
+    @Param('id') id: string,
+    @Body() input: InTransferDto,
+  ) {
+    return this.userService.transfer(userId, input, id);
   }
 }
