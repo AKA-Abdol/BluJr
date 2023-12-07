@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:khorsand87/constants/color_constants.dart';
 import 'package:khorsand87/moduls/core/components/price_component.dart';
-import 'package:khorsand87/moduls/common_goal/components/personal_goal_indicator.dart';
 import 'package:khorsand87/moduls/home/components/receive_money_container.dart';
+import 'package:vrouter/vrouter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -41,14 +41,17 @@ class HomePage extends StatelessWidget {
                                     Radius.circular(20),
                                   ),
                                 ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Image(
-                                    image: AssetImage(
-                                      'assets/images/gamer_avatar.png',
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: InkWell(
+                                    onTap: () => context.vRouter.to('/creat_child'),
+                                    child: const Image(
+                                      image: AssetImage(
+                                        'assets/images/gamer_avatar.png',
+                                      ),
+                                      width: 10,
+                                      height: 10,
                                     ),
-                                    width: 10,
-                                    height: 10,
                                   ),
                                 ),
                               ),

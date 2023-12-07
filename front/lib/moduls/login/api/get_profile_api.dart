@@ -22,9 +22,6 @@ class GetProfileApiImp implements GetProfileApi {
         ),
       );
 
-      print(response);
-      print(response!.body);
-
       if (response != null && response.statusCode == 200) {
         final Map<String, dynamic> json = Map<String, dynamic>.from(jsonDecode(response.body));
         final ProfileModel profileModel = ProfileModel.fromJson(json);
