@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khorsand87/constants/color_constants.dart';
 import 'package:khorsand87/moduls/core/components/price_component.dart';
-import 'package:khorsand87/moduls/home/components/personal_goal_indicator.dart';
+import 'package:khorsand87/moduls/common_goal/components/personal_goal_indicator.dart';
 import 'package:khorsand87/moduls/home/components/receive_money_container.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,9 +18,7 @@ class HomePage extends StatelessWidget {
               SliverAppBar(
                 expandedHeight: 200.0,
                 floating: false,
-                //    pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  // title: Text('سلام امیرحسن'),
                   background: Container(
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(0)),
@@ -81,20 +79,17 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(
-                child: PersonalGoalIndicator(),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 15),
-              ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return const ReceiveMoneyContainer(
-                      dateTime: '1400/05/07',
-                      description: 'مرتب کردن تخت خواب',
-                      type: 'A',
-                      price: '22540',
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ReceiveMoneyContainer(
+                        dateTime: '1400/05/07',
+                        description: 'مرتب کردن تخت خواب',
+                        type: 'A',
+                        price: '22540',
+                      ),
                     );
                   },
                   childCount: 10,

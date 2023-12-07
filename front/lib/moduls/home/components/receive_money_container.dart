@@ -11,10 +11,16 @@ class ReceiveMoneyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
-        ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.09),
+            spreadRadius: 4,
+            blurRadius: 4,
+          ),
+        ],
       ),
       child: ListTile(
         title: Row(

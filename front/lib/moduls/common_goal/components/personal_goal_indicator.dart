@@ -20,16 +20,22 @@ class PersonalGoalIndicator extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          Text('مانده تا هدف شخصی'),
+          Text(
+            'مانده تا خرید ps5',
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
           const SizedBox(height: 15),
           LinearPercentIndicator(
+            center: const Text(
+              "60%",
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 25),
             width: MediaQuery.of(context).size.width,
-            barRadius: Radius.circular(8),
-            lineHeight: 20.0,
-            percent: 0.5,
+            barRadius: const Radius.circular(10),
+            lineHeight: 30.0,
+            percent: 0.6,
             backgroundColor: Colors.grey,
-            //   progressColor: Colors.blue,
             animation: true,
             animationDuration: 1500,
             linearGradient: const LinearGradient(

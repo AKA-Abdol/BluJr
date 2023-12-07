@@ -1,10 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:khorsand87/moduls/common_goal/components/common_goal_description.dart';
 import 'package:khorsand87/moduls/common_goal/components/indicator.dart';
-import 'package:khorsand87/moduls/home/components/personal_goal_indicator.dart';
+import 'package:khorsand87/moduls/common_goal/components/personal_goal_indicator.dart';
 
-class PieChartSample2 extends StatefulWidget {
-  const PieChartSample2({super.key});
+class PieCharts extends StatefulWidget {
+  const PieCharts({super.key});
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
@@ -17,85 +18,84 @@ class PieChart2State extends State {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 50),
-        PersonalGoalIndicator(),
-        const SizedBox(height: 80),
-        AspectRatio(
-          aspectRatio: 1.3,
-          child: Row(
-            children: <Widget>[
-              const SizedBox(
-                height: 18,
-              ),
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: PieChart(
-                    PieChartData(
-                      pieTouchData: PieTouchData(
-                        touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                          setState(() {
-                            if (!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
-                              touchedIndex = -1;
-                              return;
-                            }
-                            touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
-                          });
-                        },
-                      ),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      sectionsSpace: 0,
-                      centerSpaceRadius: 40,
-                      sections: showingSections(),
+        const SizedBox(height: 0),
+        const PersonalGoalIndicator(),
+        const SizedBox(height: 20),
+        const CommonGoalDescription(),
+        const Spacer(),
+        Row(
+          children: <Widget>[
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PieChart(
+                  PieChartData(
+                    pieTouchData: PieTouchData(
+                      touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                        setState(() {
+                          if (!event.isInterestedForInteractions || pieTouchResponse == null || pieTouchResponse.touchedSection == null) {
+                            touchedIndex = -1;
+                            return;
+                          }
+                          touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                        });
+                      },
                     ),
+                    borderData: FlBorderData(
+                      show: false,
+                    ),
+                    sectionsSpace: 0,
+                    centerSpaceRadius: 40,
+                    sections: showingSections(),
                   ),
                 ),
               ),
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Indicator(
-                    color: Colors.red,
-                    text: 'First',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Colors.yellow,
-                    text: 'Second',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Colors.purple,
-                    text: 'Third',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Colors.green,
-                    text: 'Fourth',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 28,
-              ),
-            ],
-          ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Indicator(
+                  color: Colors.red.withOpacity(0.9),
+                  text: 'پرداخت نشده',
+                  isSquare: true,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                const Indicator(
+                  color: Colors.yellow,
+                  text: 'حسین',
+                  isSquare: true,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Colors.purple.withOpacity(0.5),
+                  text: 'علی',
+                  isSquare: true,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                const Indicator(
+                  color: Colors.green,
+                  text: 'محمد',
+                  isSquare: true,
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 28,
+            ),
+          ],
         ),
       ],
     );
@@ -110,14 +110,13 @@ class PieChart2State extends State {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Colors.red,
+            color: Colors.red.withOpacity(0.9),
             value: 40,
             title: '40%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.black,
               shadows: shadows,
             ),
           );
@@ -129,21 +128,19 @@ class PieChart2State extends State {
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.black,
               shadows: shadows,
             ),
           );
         case 2:
           return PieChartSectionData(
-            color: Colors.purple,
+            color: Colors.purple.withOpacity(0.5),
             value: 15,
             title: '15%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.black,
               shadows: shadows,
             ),
           );
@@ -155,8 +152,7 @@ class PieChart2State extends State {
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.black,
               shadows: shadows,
             ),
           );

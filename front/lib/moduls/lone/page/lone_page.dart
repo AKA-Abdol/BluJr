@@ -62,15 +62,18 @@ class _LonePage extends StatelessWidget {
                         height: 50,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: 3,
+                          physics: const ScrollPhysics(),
+                          itemCount: 4,
                           itemBuilder: (context, index) {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                RefundTimeContainer(
-                                  refundTime: '2',
-                                  onTap: () {},
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: RefundTimeContainer(
+                                    refundTime: '2',
+                                    onTap: () {},
+                                  ),
                                 ),
                               ],
                             );
