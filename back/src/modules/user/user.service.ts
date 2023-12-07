@@ -183,7 +183,7 @@ export class UserService {
       );
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   async payWeekly() {
     const children = await this.userRepo.getChildrenHasWeekly();
     console.log(children);
