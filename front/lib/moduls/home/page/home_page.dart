@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khorsand87/constants/color_constants.dart';
 import 'package:khorsand87/moduls/core/components/price_component.dart';
-import 'package:khorsand87/moduls/home/components/personal_goal_indicator.dart';
+import 'package:khorsand87/moduls/common_goal/components/personal_goal_indicator.dart';
 import 'package:khorsand87/moduls/home/components/receive_money_container.dart';
 
 class HomePage extends StatelessWidget {

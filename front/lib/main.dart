@@ -7,7 +7,7 @@ import 'package:khorsand87/moduls/login/page/auth_page.dart';
 import 'package:khorsand87/moduls/lone/page/lone_detail_page.dart';
 import 'package:khorsand87/moduls/lone/page/lone_page.dart';
 import 'package:khorsand87/moduls/task/page/task_page.dart';
-import 'package:khorsand87/them/app_them.dart';
+import 'package:khorsand87/theme/app_theme.dart';
 import 'package:vrouter/vrouter.dart';
 
 void main() {

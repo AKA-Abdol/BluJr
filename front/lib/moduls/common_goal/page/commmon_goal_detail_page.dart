@@ -27,7 +27,7 @@ class _CommonGoalDetailPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text('جزییات هدف'),
           ),
-          body: const PieChartSample2(),
+          body: const PieCharts(),
         ),
       ),
     );

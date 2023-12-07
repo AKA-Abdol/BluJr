@@ -12,13 +12,12 @@ class CoreApi {
     Map<String, String>? headers,
     String? insertedToken,
   }) async {
-    final token = Storage.instance.accessToken ?? insertedToken;
     try {
       return await _client.get(
         url,
         headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
-          if (token != null) 'access': token,
+          HttpHeaders.authorizationHeader: 'Bearer 657178e4d9c839661d89fa31',
         }..addAll(headers ?? {}),
       );
     } catch (e) {
