@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:khorsand87/moduls/core/color_constants.dart';
+import 'package:khorsand87/constants/color_constants.dart';
 import 'package:khorsand87/moduls/core/components/price_component.dart';
 import 'package:khorsand87/moduls/home/components/personal_goal_indicator.dart';
 import 'package:khorsand87/moduls/home/components/receive_money_container.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -24,7 +23,7 @@ class HomePage extends StatelessWidget {
                   // title: Text('سلام امیرحسن'),
                   background: Container(
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
                       color: ColorConstants.mainColor,
                     ),
                     child: Padding(
@@ -66,35 +65,38 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 30),
-                          Text('موجودی'),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'موجودی',
+                            style: TextStyle(fontSize: 25),
+                          ),
                           const SizedBox(height: 5),
-                          PriceComponent(price: '5000')
+                          PriceComponent(
+                            price: '5000',
+                            style: const TextStyle(fontSize: 17),
+                          )
                         ],
                       ),
                     ),
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: const SizedBox(height: 15),
+              const SliverToBoxAdapter(
+                child: PersonalGoalIndicator(),
               ),
-              SliverToBoxAdapter(
-                child: const PersonalGoalIndicator(),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 15),
               ),
-              SliverToBoxAdapter(
-                child: const SizedBox(height: 15),
+              const SliverToBoxAdapter(
+                child: PersonalGoalIndicator(),
               ),
-              SliverToBoxAdapter(
-                child: const PersonalGoalIndicator(),
-              ),
-              SliverToBoxAdapter(
-                child: const SizedBox(height: 15),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 15),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return ReceiveMoneyContainer(
+                    return const ReceiveMoneyContainer(
                       dateTime: '1400/05/07',
                       description: 'مرتب کردن تخت خواب',
                       type: 'A',

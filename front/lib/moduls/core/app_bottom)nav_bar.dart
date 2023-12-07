@@ -12,17 +12,17 @@ class AppBottomNavbar extends StatelessWidget {
       onTap: (value) {
         switch (value) {
           case 0:
-            context.vRouter.to('/profile');
+            context.vRouter.to('/lone');
             break;
           case 1:
             context.vRouter.to('/');
             break;
-          /*   case 2:
-            context.vRouter.to('/wallet');
+          case 2:
+            context.vRouter.to('/common_goal');
             break;
-          case 3:
+          /*    case 3:
             context.vRouter.to('/');
-            break; */
+            break;  */
           default:
             context.vRouter.to('/');
         }
@@ -33,7 +33,7 @@ class AppBottomNavbar extends StatelessWidget {
             'assets/svgs/profile.svg',
             color: (getCurrentIndex(context) == 0) ? Color(0xff394867) : null,
           ),
-          label: 'پروفایل',
+          label: 'درخواست وام',
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -41,6 +41,14 @@ class AppBottomNavbar extends StatelessWidget {
             color: (getCurrentIndex(context) == 1) ? Color(0xff394867) : null,
           ),
           label: 'خانه',
+        ),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            'assets/svgs/common_goal.svg',
+            width: 30,
+            color: (getCurrentIndex(context) == 2) ? Color(0xff394867) : null,
+          ),
+          label: 'هدف جمعی',
         ),
         /*    BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -67,11 +75,11 @@ class AppBottomNavbar extends StatelessWidget {
   int getCurrentIndex(BuildContext context) {
     if (context.vRouter.path.contains('home')) {
       return 0;
-    } else if (context.vRouter.path.contains('profile')) {
+    } else if (context.vRouter.path.contains('lone')) {
       return 1;
-    } /* else if (context.vRouter.path.contains('bookmark')) {
-      return 1;
-    } else if (context.vRouter.path.contains('chat')) {
+    } else if (context.vRouter.path.contains('common_goal')) {
+      return 2;
+    } /*  else if (context.vRouter.path.contains('chat')) {
       return 0;
     } */
     return 0;

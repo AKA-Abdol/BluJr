@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:khorsand87/moduls/common_goal/page/commmon_goal_detail_page.dart';
+import 'package:khorsand87/moduls/common_goal/page/common_goal_page.dart';
 import 'package:khorsand87/moduls/core/dashboard/page/dashboard.dart';
 import 'package:khorsand87/moduls/home/page/home_page.dart';
-import 'package:khorsand87/moduls/profile/page/profile_page.dart';
+import 'package:khorsand87/moduls/lone/page/lone_detail_page.dart';
+import 'package:khorsand87/moduls/lone/page/lone_page.dart';
+import 'package:khorsand87/them/app_them.dart';
 import 'package:vrouter/vrouter.dart';
 
 void main() {
@@ -14,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VRouter(
-      theme: ThemeData(useMaterial3: true),
+      theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
       routes: routes,
     );
@@ -38,21 +42,40 @@ List<VRouteElement> get routes {
           onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
           stackedRoutes: [
             VWidget(
-              path: 'profile',
-              widget: const ProfilePage(),
+              path: 'lone',
+              widget: const LonePage(),
+              stackedRoutes: [
+                VPopHandler(
+                  onSystemPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+                  onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+                  stackedRoutes: [
+                    VWidget(
+                      path: 'lone_detail',
+                      widget: const LoneDetailPage(),
+                    ),
+                  ],
+                )
+              ],
             ),
           ],
         ),
+        VWidget(
+          path: 'common_goal',
+          widget: const CommonGoalPage(),
+          stackedRoutes: [
+            VPopHandler(
+              onSystemPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+              onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
+              stackedRoutes: [
+                VWidget(
+                  path: 'common_goal_detail',
+                  widget: const CommonGoalDetailPage(),
+                ),
+              ],
+            )
+          ],
+        ),
         /*   VPopHandler(
-            onSystemPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
-            onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
-            stackedRoutes: [
-              VWidget(
-                path: 'chat',
-                widget: const ChatPage(),
-              ),
-            ]),
-        VPopHandler(
           onSystemPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
           onPop: (vRedirector) async => vRedirector.historyCanBack() ? vRedirector.historyBack() : vRedirector.pop(),
           stackedRoutes: [
@@ -61,7 +84,7 @@ List<VRouteElement> get routes {
               widget: const BookmarkPage(),
             ),
           ],
-        ), */
+        ),  */
       ],
     ),
   ];
